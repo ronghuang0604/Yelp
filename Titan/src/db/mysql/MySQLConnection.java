@@ -81,8 +81,20 @@ public class MySQLConnection {
 	}
 
 	public Set<String> getFavoriteItemIds(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	    Set<String> favoriteItems = new HashSet<>();
+	    try {
+	      String sql = "SELECT item_id from history WHERE user_id = ?";
+	      PreparedStatement statement = conn.prepareStatement(sql);
+	      statement.setString(1, userId);
+	      ResultSet rs = statement.executeQuery();
+	      while (rs.next()) {
+	        String itemId = rs.getString("item_id");
+	        favoriteItems.add(itemId);
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    return favoriteItems;
 	}
 
 	public Set<Item> getFavoriteItems(String userId) {

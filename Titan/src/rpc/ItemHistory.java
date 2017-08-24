@@ -18,7 +18,6 @@ import org.json.JSONObject;
 import db.mysql.MySQLConnection;
 import entity.Item;
 
-
 /**
  * Servlet implementation class ItemHistory
  */
@@ -26,34 +25,43 @@ import entity.Item;
 public class ItemHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MySQLConnection conn = MySQLConnection.getInstance();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ItemHistory() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String userId = request.getParameter("user_id");
-		    Set<Item> items = conn.getFavoriteItems(userId);
-		    JSONArray array = new JSONArray();
-		    for (Item item : items) {
-		      JSONObject obj = item.toJSONObject();
-		      array.put(obj);
-		    }
-		    RpcHelper.writeJsonArray(response, array);
+	public ItemHistory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userId = request.getParameter("user_id");
+		Set<Item> items = conn.getFavoriteItems(userId);
+		JSONArray array = new JSONArray();
+		for (Item item : items) {
+			JSONObject obj = item.toJSONObject();
+			try {
+				obj.append("favorite", true);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			array.put(obj);
+		}
+		RpcHelper.writeJsonArray(response, array);
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			JSONObject input = RpcHelper.readJsonObject(request);
 			String userId = input.getString("user_id");
@@ -71,8 +79,9 @@ public class ItemHistory extends HttpServlet {
 		}
 
 	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			JSONObject input = RpcHelper.readJsonObject(request);
 			String userId = input.getString("user_id");

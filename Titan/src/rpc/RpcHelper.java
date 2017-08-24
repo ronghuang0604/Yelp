@@ -24,7 +24,9 @@ public class RpcHelper {
 				sb.append(line);
 			} 
 			reader.close();
-			return new JSONObject(sb.toString());
+			JSONObject obj = new JSONObject(sb.toString());
+			System.out.println("Request: " + obj);
+			return obj;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,6 +38,7 @@ public class RpcHelper {
 		try {
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
+			System.out.println("Response: " + obj);
 			out.print(obj);
 			out.flush();
 			out.close();
