@@ -1,0 +1,70 @@
+package entity;
+
+import java.util.Set;
+
+public class Item {
+	private String itemId;
+	private String name;
+	private double rating;
+	private String address;
+	private String city;
+	private String country;
+	private String state;
+	private String zipcode;
+	private double latitude;
+	private double longitude;
+	private String description;
+	private Set<String> categories;
+	private String imageUrl;
+	private String url;
+	private String snippet;
+	private String snippetUrl;
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setCategories(Set<String> categories) {
+		this.categories = categories;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public void setSnippet(String snippet) {
+		this.snippet = snippet;
+	}
+	public void setSnippetUrl(String snippetUrl) {
+		this.snippetUrl = snippetUrl;
+	}
+}
